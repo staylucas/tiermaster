@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drag and Drop Tiers</title>
+  <title>Adalo Tier List</title>
   <style>
     .tier {
       border: 1px solid #ccc;
@@ -15,38 +15,76 @@
       border: 1px solid #ddd;
       padding: 10px;
     }
+    .image-item {
+      margin: 5px;
+      padding: 5px;
+      border: 1px solid #aaa;
+    }
   </style>
 </head>
 <body>
-  <div id="tiers">
-    <div class="tier" id="tier1">Tier 1
-      <div id="tier1-images" class="images-list">
-        <!-- Images will be dynamically added here -->
-      </div>
+  <div class="tier" id="tier-id"> <!-- Replace tier-id with the actual tier ID or name -->
+    <div class="images-list" id="tier-images"> <!-- Replace tier-images with the actual image list ID -->
+      <!-- Images will be dynamically added here -->
     </div>
-    <div class="tier" id="tier2">Tier 2
-      <div id="tier2-images" class="images-list">
-        <!-- Images will be dynamically added here -->
-      </div>
-    </div>
-    <!-- Add more tiers as needed -->
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
-    var el = document.getElementById('tiers');
-    var sortable = Sortable.create(el, {
-      group: 'shared',
-      animation: 150,
-      onEnd: function (evt) {
-        var itemEl = evt.item;
-        var fromTier = evt.from.id;
-        var toTier = evt.to.id;
+    document.addEventListener('DOMContentLoaded', function () {
+      var tierList = document.getElementById('tier-images'); // Replace with the actual ID used in each instance
 
-        // Placeholder for Adalo API call to update the tier of the image
-        console.log('Image moved from', fromTier, 'to', toTier);
-      },
+      // Sample data - Replace this with dynamic data from your Adalo database
+      var imageItems = [
+        { id: 'item1', name: 'Item 1' },
+        { id: 'item2', name: 'Item 2' },
+        { id: 'item3', name: 'Item 3' },
+        { id: 'item4', name: 'Item 4' },
+        { id: 'item5', name: 'Item 5' },
+      ];
+
+      // Dynamically add images to the list
+      imageItems.forEach(function(item) {
+        var div = document.createElement('div');
+        div.className = 'image-item';
+        div.id = item.id;
+        div.textContent = item.name;
+        tierList.appendChild(div);
+      });
+
+      // Initialize Sortable
+      Sortable.create(tierList, {
+        animation: 150,
+        onEnd: function (evt) {
+          var itemEl = evt.item;
+          var fromIndex = evt.oldIndex;
+          var toIndex = evt.newIndex;
+
+          // Placeholder for Adalo API call to update the order of the image
+          console.log('Image moved from index', fromIndex, 'to', toIndex);
+          // You can use Adalo's API or actions to update the database
+          // Example: updateOrder(itemEl.id, fromIndex, toIndex);
+        },
+      });
     });
+
+    // Function to update order in Adalo's database (example)
+    function updateOrder(itemId, fromIndex, toIndex) {
+      // Make an API call to update the item's order in the Adalo database
+      // fetch('https://api.adalo.com/v0/...', {
+      //   method: 'PATCH',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': 'Bearer YOUR_ADALO_API_KEY'
+      //   },
+      //   body: JSON.stringify({
+      //     fromIndex: fromIndex,
+      //     toIndex: toIndex
+      //   })
+      // }).then(response => response.json())
+      //   .then(data => console.log(data))
+      //   .catch(error => console.error('Error:', error));
+    }
   </script>
 </body>
 </html>
