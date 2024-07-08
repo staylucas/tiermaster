@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drag and Drop Tiers</title>
+  <style>
+    .tier {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    .images-list {
+      min-height: 100px;
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="tiers">
+    <div class="tier" id="tier1">Tier 1
+      <div id="tier1-images" class="images-list">
+        <!-- Images will be dynamically added here -->
+      </div>
+    </div>
+    <div class="tier" id="tier2">Tier 2
+      <div id="tier2-images" class="images-list">
+        <!-- Images will be dynamically added here -->
+      </div>
+    </div>
+    <!-- Add more tiers as needed -->
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+  <script>
+    var el = document.getElementById('tiers');
+    var sortable = Sortable.create(el, {
+      group: 'shared',
+      animation: 150,
+      onEnd: function (evt) {
+        var itemEl = evt.item;
+        var fromTier = evt.from.id;
+        var toTier = evt.to.id;
+
+        // Placeholder for Adalo API call to update the tier of the image
+        console.log('Image moved from', fromTier, 'to', toTier);
+      },
+    });
+  </script>
+</body>
+</html>
