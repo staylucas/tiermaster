@@ -31,7 +31,7 @@
       border: 2px dashed #ddd;
       padding: 10px;
       margin-left: 10px;
-      flex: 1;
+      flex: 1; /* Expand horizontally */
       display: flex;
       flex-direction: column;
       gap: 5px;
@@ -124,10 +124,10 @@
 
   <div class="draggable-items" id="draggable-items">
     <!-- Draggable items -->
-    <div class="image-item" id="item1"><img src="https://via.placeholder.com/50" alt="Image 1"></div>
-    <div class="image-item" id="item2"><img src="https://via.placeholder.com/50" alt="Image 2"></div>
-    <div class="image-item" id="item3"><img src="https://via.placeholder.com/50" alt="Image 3"></div>
-    <div class="image-item" id="item4"><img src="https://via.placeholder.com/50" alt="Image 4"></div>
+    <div class="image-item" id="item1" data-cloned="false"><img src="https://via.placeholder.com/50" alt="Image 1"></div>
+    <div class="image-item" id="item2" data-cloned="false"><img src="https://via.placeholder.com/50" alt="Image 2"></div>
+    <div class="image-item" id="item3" data-cloned="false"><img src="https://via.placeholder.com/50" alt="Image 3"></div>
+    <div class="image-item" id="item4" data-cloned="false"><img src="https://via.placeholder.com/50" alt="Image 4"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
@@ -144,6 +144,7 @@
           animation: 150,
           onAdd: function (evt) {
             var itemEl = evt.item;
+            itemEl.setAttribute('data-cloned', 'true'); // Mark the item as cloned
             console.log('Item added to', zoneId, ':', itemEl.id);
           },
           onEnd: function (evt) {
