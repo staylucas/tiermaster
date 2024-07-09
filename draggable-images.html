@@ -5,17 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tier List with Draggable Items</title>
   <style>
-    .drop-zone {
-      min-height: 100px;
-      border: 2px dashed #ddd;
-      padding: 20px;
-      margin-bottom: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-    }
     .draggable-items {
       display: flex;
       gap: 10px;
@@ -40,11 +29,7 @@
     }
   </style>
 </head>
-<body>
-  <div class="drop-zone" id="tier-dropzone">
-    Drop items here
-  </div>
-  
+<body>  
   <div class="draggable-items" id="draggable-items">
     <!-- Draggable items -->
     <div class="image-item" id="item1"><img src="https://via.placeholder.com/80" alt="Image 1"></div>
