@@ -78,6 +78,11 @@
       max-width: 100%;
       max-height: 100%;
     }
+    .save-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -154,6 +159,8 @@
     <div class="image-item" id="item4"><img src="https://via.placeholder.com/30" alt="Image 4"></div>
   </div>
 
+  <button class="save-button" onclick="saveTierList()">Save Tier List</button>
+
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -196,6 +203,32 @@
         },
       });
     });
+
+    function saveTierList() {
+      var tierList = {};
+
+      ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'].forEach(function (zoneId) {
+        var dropZone = document.getElementById(zoneId);
+        var items = Array.from(dropZone.children).map(function (item) {
+          return item.id;
+        });
+        tierList[zoneId] = items;
+      });
+
+      var json = JSON.stringify(tierList, null, 2);
+      downloadJSON(json, 'tier-list.json');
+    }
+
+    function downloadJSON(json, filename) {
+      var blob = new Blob([json], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
   </script>
 </body>
 </html>
