@@ -37,16 +37,12 @@
       align-items: center;
       justify-content: center;
       background-color: #f0f0f0;
-      width: 100%;
-    }
-    .drop-zone .tier-label {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 5px;
+      width: calc(100% - 60px); /* Adjust width to accommodate left image and spacing */
     }
     .drop-zone img {
       max-width: 50px; /* Adjust size of the letter image */
       max-height: 50px;
+      margin-right: 10px; /* Add spacing between image and drop zone */
     }
     .draggable-items {
       display: flex;
@@ -81,31 +77,24 @@
       <!-- Drop zones for each tier -->
       <div class="drop-zone" id="tier-s">
         <img src="https://via.placeholder.com/50" alt="S">
-        <div class="tier-label">S Tier</div>
       </div>
       <div class="drop-zone" id="tier-a">
         <img src="https://via.placeholder.com/50" alt="A">
-        <div class="tier-label">A Tier</div>
       </div>
       <div class="drop-zone" id="tier-b">
         <img src="https://via.placeholder.com/50" alt="B">
-        <div class="tier-label">B Tier</div>
       </div>
       <div class="drop-zone" id="tier-c">
         <img src="https://via.placeholder.com/50" alt="C">
-        <div class="tier-label">C Tier</div>
       </div>
       <div class="drop-zone" id="tier-d">
         <img src="https://via.placeholder.com/50" alt="D">
-        <div class="tier-label">D Tier</div>
       </div>
       <div class="drop-zone" id="tier-e">
         <img src="https://via.placeholder.com/50" alt="E">
-        <div class="tier-label">E Tier</div>
       </div>
       <div class="drop-zone" id="tier-f">
         <img src="https://via.placeholder.com/50" alt="F">
-        <div class="tier-label">F Tier</div>
       </div>
     </div>
 
