@@ -123,13 +123,12 @@
   </div>
 
   <div class="draggable-items" id="draggable-items">
-  <!-- Draggable items -->
-  <div class="image-item" id="item1"><img src="https://via.placeholder.com/30.png" alt="Image 1"></div>
-  <div class="image-item" id="item2"><img src="https://via.placeholder.com/30.png" alt="Image 2"></div>
-  <div class="image-item" id="item3"><img src="https://via.placeholder.com/30.png" alt="Image 3"></div>
-  <div class="image-item" id="item4"><img src="https://via.placeholder.com/30.png" alt="Image 4"></div>
-</div>
-
+    <!-- Draggable items -->
+    <div class="image-item" id="item1"><img src="https://via.placeholder.com/30.png" alt="Image 1"></div>
+    <div class="image-item" id="item2"><img src="https://via.placeholder.com/30.png" alt="Image 2"></div>
+    <div class="image-item" id="item3"><img src="https://via.placeholder.com/30.png" alt="Image 3"></div>
+    <div class="image-item" id="item4"><img src="https://via.placeholder.com/30.png" alt="Image 4"></div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
@@ -160,7 +159,10 @@
       Sortable.create(draggableItems, {
         group: {
           name: 'shared',
-          pull: 'clone', // Allow items to be cloned
+          pull: function (to, from, dragEl, evt) {
+            // Clone the item if it's dragged from the draggable items container
+            return from.el !== draggableItems;
+          },
           put: false    // Prevent items from being dropped back into this container
         },
         animation: 150,
