@@ -150,7 +150,7 @@
       </div>
     </div>
   </div>
-
+  
   <div class="draggable-items" id="draggable-items">
     <!-- Draggable items -->
     <div class="image-item" id="item1"><img src="https://via.placeholder.com/30" alt="Image 1"></div>
@@ -158,8 +158,6 @@
     <div class="image-item" id="item3"><img src="https://via.placeholder.com/30" alt="Image 3"></div>
     <div class="image-item" id="item4"><img src="https://via.placeholder.com/30" alt="Image 4"></div>
   </div>
-
-  <button class="save-button" onclick="saveTierList()">Save Tier List</button>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
@@ -203,47 +201,6 @@
         },
       });
     });
-
-    <script>
-  function saveTierList() {
-    var tierList = {};
-
-    ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'].forEach(function (zoneId) {
-      var dropZone = document.getElementById(zoneId);
-      var items = Array.from(dropZone.children).map(function (item) {
-        return item.id;
-      });
-      tierList[zoneId] = items;
-    });
-
-    var json = JSON.stringify(tierList);
-
-    uploadToAdalo(json);
-  }
-
-  function uploadToAdalo(json) {
-    var apiKey = '987b04l73jsdkv8zyfr5w6fnc'; // Replace with your actual Adalo API key
-    var url = 'https://api.adalo.com/v0/apps/f1deecd5-c492-4c9f-b961-1b8358f07f9d/collections/t_0rusaj4khkgyth10nexxcpxqe'; // Replace with your actual Adalo collection API endpoint
-
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + apiKey
-      },
-      body: JSON.stringify({
-        name: 'My Tier List', // You can replace this with a dynamic value if needed
-        tierData: json
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  }
-</script>
+  </script>
 </body>
 </html>
