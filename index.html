@@ -73,49 +73,49 @@
 <body>
   <div class="container">
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/gFrhggr/S.png" alt="S">
+      <img class="tier-label" src="https://ibb.co/gFrhggr" alt="S">
       <div class="drop-zone" id="tier-s">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/VmSn2XK/A.png" alt="A">
+      <img class="tier-label" src="https://ibb.co/VmSn2XK" alt="A">
       <div class="drop-zone" id="tier-a">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/fSkdfPN/B.png" alt="B">
+      <img class="tier-label" src="https://ibb.co/fSkdfPN" alt="B">
       <div class="drop-zone" id="tier-b">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/fp3b5G1/C.png" alt="C">
+      <img class="tier-label" src="https://ibb.co/fp3b5G1" alt="C">
       <div class="drop-zone" id="tier-c">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/3NVjjc3/D.png" alt="D">
+      <img class="tier-label" src="https://ibb.co/3NVjjc3" alt="D">
       <div class="drop-zone" id="tier-d">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/WF1yRZG/E.png" alt="E">
+      <img class="tier-label" src="https://ibb.co/WF1yRZG" alt="E">
       <div class="drop-zone" id="tier-e">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/bR9zFM0/F.png" alt="F">
+      <img class="tier-label" src="https://ibb.co/bR9zFM0" alt="F">
       <div class="drop-zone" id="tier-f">
         <!-- Drop zone content here -->
       </div>
@@ -124,17 +124,16 @@
 
   <div class="draggable-items" id="draggable-items">
     <!-- Draggable items -->
-    <div class="image-item" id="item1" data-cloned="false"><img src="https://ibb.co/c8f6PBD" alt="Image 1"></div>
-    <div class="image-item" id="item2" data-cloned="false"><img src="https://ibb.co/NrBXJK9" alt="Image 2"></div>
-    <div class="image-item" id="item3" data-cloned="false"><img src="https://ibb.co/z6mG9ht" alt="Image 3"></div>
-    <div class="image-item" id="item4" data-cloned="false"><img src="https://ibb.co/BgFGtwr" alt="Image 4"></div>
+    <div class="image-item" id="item1"><img src="https://ibb.co/c8f6PBD" alt="Image 1"></div>
+    <div class="image-item" id="item2"><img src="https://ibb.co/NrBXJK9" alt="Image 2"></div>
+    <div class="image-item" id="item3"><img src="https://ibb.co/z6mG9ht" alt="Image 3"></div>
+    <div class="image-item" id="item4"><img src="https://ibb.co/BgFGtwr" alt="Image 4"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var dropZones = ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'];
-      var draggableItems = document.getElementById('draggable-items');
 
       // Initialize Sortable on each drop zone
       dropZones.forEach(function (zoneId) {
@@ -144,7 +143,7 @@
           animation: 150,
           onAdd: function (evt) {
             var itemEl = evt.item;
-            itemEl.setAttribute('data-cloned', 'true'); // Mark the item as cloned
+            itemEl.parentNode.removeChild(itemEl); // Remove dragged item from the draggable items list
             console.log('Item added to', zoneId, ':', itemEl.id);
           },
           onEnd: function (evt) {
@@ -165,12 +164,6 @@
         },
         animation: 150,
         sort: false, // Prevent sorting within the source container
-        onEnd: function (evt) {
-          var itemEl = evt.item;
-          var fromIndex = evt.oldIndex;
-          var toIndex = evt.newIndex;
-          console.log('Item moved from index', fromIndex, 'to', toIndex);
-        },
       });
     });
   </script>
