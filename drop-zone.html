@@ -31,11 +31,7 @@
 
       // Initialize Sortable on the drop zone
       Sortable.create(dropZone, {
-        group: {
-          name: 'shared',
-          pull: true,
-          put: true
-        },
+        group: 'shared',
         animation: 150,
         onAdd: function (evt) {
           var itemEl = evt.item;
