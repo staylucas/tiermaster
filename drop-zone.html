@@ -6,14 +6,16 @@
   <title>Drop Zone</title>
   <style>
     .drop-zone {
-      min-height: 100px;
+      min-height: 200px;
       border: 2px dashed #ddd;
       padding: 20px;
+      margin: 20px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       align-items: center;
       justify-content: center;
+      background-color: #f0f0f0;
     }
   </style>
 </head>
@@ -29,7 +31,11 @@
 
       // Initialize Sortable on the drop zone
       Sortable.create(dropZone, {
-        group: 'shared',
+        group: {
+          name: 'shared',
+          pull: true,
+          put: true
+        },
         animation: 150,
         onAdd: function (evt) {
           var itemEl = evt.item;
