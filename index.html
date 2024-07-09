@@ -15,16 +15,14 @@
       flex-direction: column;
       align-items: center;
       padding: 10px;
-      max-width: 1000px; /* Adjust maximum width of the container */
     }
     .tier-container {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      align-items: flex-start; /* Align items to the start */
+      align-items: center;
       justify-content: center;
       padding: 10px;
-      width: 100%;
     }
     .drop-zone {
       min-height: 30px; /* Adjusted height */
@@ -37,14 +35,13 @@
       align-items: center;
       justify-content: center;
       background-color: #f0f0f0;
-      width: calc((100% - 120px) / 7); /* Adjusted width for drop zones */
-      max-width: 120px; /* Example max width */
-      text-align: center; /* Center the content */
+      width: calc(100% / 7); /* Adjust width based on the number of tiers */
+      max-width: 100px; /* Example max width */
     }
     .drop-zone img {
       max-width: 50px; /* Adjust size of the letter image */
       max-height: 50px;
-      margin-bottom: 5px; /* Add spacing between image and drop zone */
+      margin-right: 10px; /* Add spacing between image and drop zone */
     }
     .draggable-items {
       display: flex;
@@ -76,56 +73,37 @@
 <body>
   <div class="container">
     <div class="tier-container">
-      <!-- Tier labels outside drop zones -->
-      <div>
-        <img src="https://via.placeholder.com/50" alt="S">
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/50" alt="A">
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/50" alt="B">
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/50" alt="C">
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/50" alt="D">
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/50" alt="E">
-      </div>
-      <div>
-        <img src="https://via.placeholder.com/50" alt="F">
-      </div>
-    </div>
-
-    <!-- Drop zones -->
-    <div class="tier-container">
+      <img src="https://via.placeholder.com/50" alt="S">
       <div class="drop-zone" id="tier-s">
         <!-- Drop zone content here -->
       </div>
       
+      <img src="https://via.placeholder.com/50" alt="A">
       <div class="drop-zone" id="tier-a">
         <!-- Drop zone content here -->
       </div>
       
+      <img src="https://via.placeholder.com/50" alt="B">
       <div class="drop-zone" id="tier-b">
         <!-- Drop zone content here -->
       </div>
       
+      <img src="https://via.placeholder.com/50" alt="C">
       <div class="drop-zone" id="tier-c">
         <!-- Drop zone content here -->
       </div>
       
+      <img src="https://via.placeholder.com/50" alt="D">
       <div class="drop-zone" id="tier-d">
         <!-- Drop zone content here -->
       </div>
       
+      <img src="https://via.placeholder.com/50" alt="E">
       <div class="drop-zone" id="tier-e">
         <!-- Drop zone content here -->
       </div>
       
+      <img src="https://via.placeholder.com/50" alt="F">
       <div class="drop-zone" id="tier-f">
         <!-- Drop zone content here -->
       </div>
