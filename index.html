@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Drag and Drop</title>
+  <title>Simple Drop Field</title>
   <style>
-    .images-list {
+    .drop-zone {
       min-height: 100px;
-      border: 1px solid #ddd;
-      padding: 10px;
+      border: 2px dashed #ddd;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
     }
     .image-item {
       padding: 10px;
@@ -22,19 +24,23 @@
   </style>
 </head>
 <body>
-  <div class="images-list" id="item-images">
-    <!-- One item for drag and drop -->
-    <div class="image-item" id="item"></div>
+  <div class="drop-zone" id="tier-dropzone">
+    Drop items here
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var tierList = document.getElementById('item-images');
+      var dropZone = document.getElementById('tier-dropzone');
 
-      // Initialize Sortable
-      Sortable.create(tierList, {
+      // Initialize Sortable on the drop zone
+      Sortable.create(dropZone, {
+        group: 'shared',
         animation: 150,
+        onAdd: function (evt) {
+          var itemEl = evt.item;
+          console.log('Item added:', itemEl.id);
+        },
         onEnd: function (evt) {
           var itemEl = evt.item;
           var fromIndex = evt.oldIndex;
