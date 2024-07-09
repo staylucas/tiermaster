@@ -53,13 +53,13 @@
       max-width: 745px;
     }
     .image-item {
-      padding: 10px;
+      padding: 5px; /* Adjust padding */
       border: 1px solid #aaa;
       background-color: #f9f9f9;
       cursor: grab;
       text-align: center;
-      width: 50px;
-      height: 50px;
+      width: 30px; /* Adjust width */
+      height: 30px; /* Adjust height */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -73,49 +73,49 @@
 <body>
   <div class="container">
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/68sH9C8/S.png" alt="S">
+      <img class="tier-label" src="https://i.ibb.co/gFrhggr/S.png" alt="S">
       <div class="drop-zone" id="tier-s">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/RpqVj9T/A.png" alt="A">
+      <img class="tier-label" src="https://i.ibb.co/VmSn2XK/A.png" alt="A">
       <div class="drop-zone" id="tier-a">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/Jv7P8Fg/B.png" alt="B">
+      <img class="tier-label" src="https://i.ibb.co/fSkdfPN/B.png" alt="B">
       <div class="drop-zone" id="tier-b">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/jT5Ymcv/C.png" alt="C">
+      <img class="tier-label" src="https://i.ibb.co/fp3b5G1/C.png" alt="C">
       <div class="drop-zone" id="tier-c">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/SQ2x5h1/D.png" alt="D">
+      <img class="tier-label" src="https://i.ibb.co/3NVjjc3/D.png" alt="D">
       <div class="drop-zone" id="tier-d">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/7JxgM8w/E.png" alt="E">
+      <img class="tier-label" src="https://i.ibb.co/WF1yRZG/E.png" alt="E">
       <div class="drop-zone" id="tier-e">
         <!-- Drop zone content here -->
       </div>
     </div>
     
     <div class="tier-row">
-      <img class="tier-label" src="https://i.ibb.co/nMf6jZd/F.png" alt="F">
+      <img class="tier-label" src="https://i.ibb.co/bR9zFM0/F.png" alt="F">
       <div class="drop-zone" id="tier-f">
         <!-- Drop zone content here -->
       </div>
@@ -124,27 +124,26 @@
 
   <div class="draggable-items" id="draggable-items">
     <!-- Draggable items -->
-    <div class="image-item" id="item1" data-cloned="false"><img src="https://i.ibb.co/4Pm1skL/item1.png" alt="Image 1"></div>
-    <div class="image-item" id="item2" data-cloned="false"><img src="https://i.ibb.co/KDmc6cH/item2.png" alt="Image 2"></div>
-    <div class="image-item" id="item3" data-cloned="false"><img src="https://i.ibb.co/3S4jsSv/item3.png" alt="Image 3"></div>
-    <div class="image-item" id="item4" data-cloned="false"><img src="https://i.ibb.co/N2pCwYr/item4.png" alt="Image 4"></div>
+    <div class="image-item" id="item1"><img src="https://via.placeholder.com/30.png" alt="Image 1"></div>
+    <div class="image-item" id="item2"><img src="https://via.placeholder.com/30.png" alt="Image 2"></div>
+    <div class="image-item" id="item3"><img src="https://via.placeholder.com/30.png" alt="Image 3"></div>
+    <div class="image-item" id="item4"><img src="https://via.placeholder.com/30.png" alt="Image 4"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var dropZones = ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'];
-      var draggableItems = document.getElementById('draggable-items');
 
       // Initialize Sortable on each drop zone
       dropZones.forEach(function (zoneId) {
         var dropZone = document.getElementById(zoneId);
-        Sortable.create(dropZone, {
+        new Sortable(dropZone, {
           group: 'shared',
           animation: 150,
           onAdd: function (evt) {
             var itemEl = evt.item;
-            itemEl.setAttribute('data-cloned', 'true'); // Mark the item as cloned
+            itemEl.parentNode.removeChild(itemEl); // Remove dragged item from the draggable items list
             console.log('Item added to', zoneId, ':', itemEl.id);
           },
           onEnd: function (evt) {
@@ -157,20 +156,10 @@
       });
 
       // Initialize Sortable on the draggable items container
-      Sortable.create(draggableItems, {
-        group: {
-          name: 'shared',
-          pull: 'clone', // Allow items to be cloned
-          put: false    // Prevent items from being dropped back into this container
-        },
+      new Sortable(draggableItems, {
+        group: 'shared',
         animation: 150,
         sort: false, // Prevent sorting within the source container
-        onEnd: function (evt) {
-          var itemEl = evt.item;
-          var fromIndex = evt.oldIndex;
-          var toIndex = evt.newIndex;
-          console.log('Item moved from index', fromIndex, 'to', toIndex);
-        },
       });
     });
   </script>
