@@ -16,29 +16,32 @@
       align-items: center;
       padding: 10px;
     }
-    .tier-container {
+    .tier-row {
       display: flex;
-      flex-direction: column; /* Change to column layout on small screens */
       align-items: center;
-      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .tier-label {
+      width: 50px; /* Adjust as needed */
+      height: 50px; /* Adjust as needed */
+      margin-right: 10px;
     }
     .drop-zone {
-      min-height: 30px; /* Adjusted height */
+      min-height: 30px;
       border: 2px dashed #ddd;
       padding: 10px;
-      margin: 10px;
+      margin-left: 10px;
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: 5px;
       align-items: center;
       justify-content: center;
       background-color: #f0f0f0;
-      max-width: 100%; /* Take full width of the container */
     }
     .drop-zone img {
-      max-width: 50px; /* Adjust size of the letter image */
+      max-width: 50px;
       max-height: 50px;
-      margin-right: 10px; /* Add spacing between image and drop zone */
     }
     .draggable-items {
       display: flex;
@@ -47,7 +50,7 @@
       flex-wrap: wrap;
       margin: 20px;
       width: 100%;
-      max-width: 745px; /* Limit to 745px width */
+      max-width: 745px;
     }
     .image-item {
       padding: 10px;
@@ -55,8 +58,8 @@
       background-color: #f9f9f9;
       cursor: grab;
       text-align: center;
-      width: 50px; /* Adjusted width */
-      height: 50px; /* Adjusted height */
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -69,57 +72,62 @@
 </head>
 <body>
   <div class="container">
-    <div class="tier-container">
-      <!-- Tier S -->
+    <div class="tier-row">
+      <img class="tier-label" src="https://via.placeholder.com/50" alt="S">
       <div class="drop-zone" id="tier-s">
-        <img src="https://via.placeholder.com/50" alt="S">
         <!-- Drop zone content here -->
       </div>
-      
-      <!-- Tier A -->
+    </div>
+    
+    <div class="tier-row">
+      <img class="tier-label" src="https://via.placeholder.com/50" alt="A">
       <div class="drop-zone" id="tier-a">
-        <img src="https://via.placeholder.com/50" alt="A">
         <!-- Drop zone content here -->
       </div>
-      
-      <!-- Tier B -->
+    </div>
+    
+    <div class="tier-row">
+      <img class="tier-label" src="https://via.placeholder.com/50" alt="B">
       <div class="drop-zone" id="tier-b">
-        <img src="https://via.placeholder.com/50" alt="B">
         <!-- Drop zone content here -->
       </div>
-      
-      <!-- Tier C -->
+    </div>
+    
+    <div class="tier-row">
+      <img class="tier-label" src="https://via.placeholder.com/50" alt="C">
       <div class="drop-zone" id="tier-c">
-        <img src="https://via.placeholder.com/50" alt="C">
         <!-- Drop zone content here -->
       </div>
-      
-      <!-- Tier D -->
+    </div>
+    
+    <div class="tier-row">
+      <img class="tier-label" src="https://via.placeholder.com/50" alt="D">
       <div class="drop-zone" id="tier-d">
-        <img src="https://via.placeholder.com/50" alt="D">
         <!-- Drop zone content here -->
       </div>
-      
-      <!-- Tier E -->
+    </div>
+    
+    <div class="tier-row">
+      <img class="tier-label" src="https://via.placeholder.com/50" alt="E">
       <div class="drop-zone" id="tier-e">
-        <img src="https://via.placeholder.com/50" alt="E">
         <!-- Drop zone content here -->
       </div>
-      
-      <!-- Tier F -->
+    </div>
+    
+    <div class="tier-row">
+      <img class="tier-label" src="https://via.placeholder.com/50" alt="F">
       <div class="drop-zone" id="tier-f">
-        <img src="https://via.placeholder.com/50" alt="F">
         <!-- Drop zone content here -->
       </div>
     </div>
+  </div>
 
+  <div class="draggable-items" id="draggable-items">
     <!-- Draggable items -->
-    <div class="draggable-items" id="draggable-items">
-      <div class="image-item" id="item1"><img src="https://via.placeholder.com/50" alt="Image 1"></div>
-      <div class="image-item" id="item2"><img src="https://via.placeholder.com/50" alt="Image 2"></div>
-      <div class="image-item" id="item3"><img src="https://via.placeholder.com/50" alt="Image 3"></div>
-      <div class="image-item" id="item4"><img src="https://via.placeholder.com/50" alt="Image 4"></div>
-    </div>
+    <div class="image-item" id="item1"><img src="https://via.placeholder.com/50" alt="Image 1"></div>
+    <div class="image-item" id="item2"><img src="https://via.placeholder.com/50" alt="Image 2"></div>
+    <div class="image-item" id="item3"><img src="https://via.placeholder.com/50" alt="Image 3"></div>
+    <div class="image-item" id="item4"><img src="https://via.placeholder.com/50" alt="Image 4"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
