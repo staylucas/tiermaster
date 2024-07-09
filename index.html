@@ -11,44 +11,52 @@
       font-family: Arial, sans-serif;
     }
     .container {
+      width: 745px;
+      margin: 0 auto;
       display: flex;
       flex-direction: row;
-      height: 100vh;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px;
+      box-sizing: border-box;
     }
     .tier-container {
       display: flex;
       flex-direction: column;
+      gap: 10px;
       flex: 1;
-      padding: 20px;
       overflow-y: auto;
     }
     .drop-zone {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       border: 2px dashed #ddd;
       padding: 10px;
       margin: 10px 0;
       min-height: 40px;
       background-color: #f0f0f0;
       cursor: pointer;
+      width: calc(100% - 60px); /* Adjust width to fit within the container */
     }
     .drop-zone .drop-content {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 10px;
       flex-grow: 1;
     }
     .drop-zone img {
       max-width: 30px;
       max-height: 30px;
+      margin-right: 10px; /* Spacing between image and label */
     }
     .draggable-items {
       display: flex;
       flex-direction: column;
       gap: 10px;
       padding: 20px;
+      width: 60px; /* Width for draggable items container */
     }
     .image-item {
       padding: 10px;
@@ -56,8 +64,8 @@
       background-color: #f9f9f9;
       cursor: grab;
       text-align: center;
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -70,12 +78,12 @@
 </head>
 <body>
   <div class="container">
-    <div class="draggable-items">
+    <div class="draggable-items" id="draggable-items">
       <!-- Draggable items -->
-      <div class="image-item" id="item1"><img src="https://via.placeholder.com/60" alt="Image 1"></div>
-      <div class="image-item" id="item2"><img src="https://via.placeholder.com/60" alt="Image 2"></div>
-      <div class="image-item" id="item3"><img src="https://via.placeholder.com/60" alt="Image 3"></div>
-      <div class="image-item" id="item4"><img src="https://via.placeholder.com/60" alt="Image 4"></div>
+      <div class="image-item" id="item1"><img src="https://via.placeholder.com/40" alt="Image 1"></div>
+      <div class="image-item" id="item2"><img src="https://via.placeholder.com/40" alt="Image 2"></div>
+      <div class="image-item" id="item3"><img src="https://via.placeholder.com/40" alt="Image 3"></div>
+      <div class="image-item" id="item4"><img src="https://via.placeholder.com/40" alt="Image 4"></div>
     </div>
 
     <div class="tier-container">
@@ -83,43 +91,43 @@
       <div class="drop-zone" id="tier-s">
         <div class="drop-content">
           <img src="https://via.placeholder.com/30" alt="S">
-          <span>S</span>
+          <span>S Tier</span>
         </div>
       </div>
       <div class="drop-zone" id="tier-a">
         <div class="drop-content">
           <img src="https://via.placeholder.com/30" alt="A">
-          <span>A</span>
+          <span>A Tier</span>
         </div>
       </div>
       <div class="drop-zone" id="tier-b">
         <div class="drop-content">
           <img src="https://via.placeholder.com/30" alt="B">
-          <span>B</span>
+          <span>B Tier</span>
         </div>
       </div>
       <div class="drop-zone" id="tier-c">
         <div class="drop-content">
           <img src="https://via.placeholder.com/30" alt="C">
-          <span>C</span>
+          <span>C Tier</span>
         </div>
       </div>
       <div class="drop-zone" id="tier-d">
         <div class="drop-content">
           <img src="https://via.placeholder.com/30" alt="D">
-          <span>D</span>
+          <span>D Tier</span>
         </div>
       </div>
       <div class="drop-zone" id="tier-e">
         <div class="drop-content">
           <img src="https://via.placeholder.com/30" alt="E">
-          <span>E</span>
+          <span>E Tier</span>
         </div>
       </div>
       <div class="drop-zone" id="tier-f">
         <div class="drop-content">
           <img src="https://via.placeholder.com/30" alt="F">
-          <span>F</span>
+          <span>F Tier</span>
         </div>
       </div>
     </div>
