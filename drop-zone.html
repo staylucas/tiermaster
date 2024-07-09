@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drop Zone</title>
+  <style>
+    .drop-zone {
+      min-height: 100px;
+      border: 2px dashed #ddd;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="drop-zone" id="tier-dropzone">
+    Drop items here
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropZone = document.getElementById('tier-dropzone');
+
+      // Initialize Sortable on the drop zone
+      Sortable.create(dropZone, {
+        group: 'shared',
+        animation: 150,
+        onAdd: function (evt) {
+          var itemEl = evt.item;
+          console.log('Item added:', itemEl.id);
+        },
+        onEnd: function (evt) {
+          var itemEl = evt.item;
+          var fromIndex = evt.oldIndex;
+          var toIndex = evt.newIndex;
+
+          // Log the movement
+          console.log('Item moved from index', fromIndex, 'to', toIndex);
+        },
+      });
+    });
+  </script>
+</body>
+</html>
