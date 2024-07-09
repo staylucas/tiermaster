@@ -3,35 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Drop Field</title>
+  <title>Drag and Drop Tier List</title>
   <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
     .drop-zone {
-      min-height: 100px;
+      min-height: 200px;
       border: 2px dashed #ddd;
       padding: 20px;
+      margin: 20px;
+      width: 100%;
       display: flex;
       flex-direction: column;
       gap: 10px;
       align-items: center;
       justify-content: center;
+      background-color: #f0f0f0;
+    }
+    .draggable-items {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px;
     }
     .image-item {
       padding: 10px;
       border: 1px solid #aaa;
       background-color: #f9f9f9;
       cursor: grab;
+      text-align: center;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-item img {
+      max-width: 100%;
+      max-height: 100%;
     }
   </style>
 </head>
 <body>
-  <div class="drop-zone" id="tier-dropzone">
-    Drop items here
+  <div class="container">
+    <div class="drop-zone" id="tier-dropzone">
+      Drop items here
+    </div>
+
+    <div class="draggable-items" id="draggable-items">
+      <!-- Draggable items -->
+      <div class="image-item" id="item1"><img src="https://via.placeholder.com/80" alt="Image 1"></div>
+      <div class="image-item" id="item2"><img src="https://via.placeholder.com/80" alt="Image 2"></div>
+      <div class="image-item" id="item3"><img src="https://via.placeholder.com/80" alt="Image 3"></div>
+      <div class="image-item" id="item4"><img src="https://via.placeholder.com/80" alt="Image 4"></div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       var dropZone = document.getElementById('tier-dropzone');
+      var draggableItems = document.getElementById('draggable-items');
 
       // Initialize Sortable on the drop zone
       Sortable.create(dropZone, {
@@ -45,8 +83,23 @@
           var itemEl = evt.item;
           var fromIndex = evt.oldIndex;
           var toIndex = evt.newIndex;
+          console.log('Item moved from index', fromIndex, 'to', toIndex);
+        },
+      });
 
-          // Log the movement
+      // Initialize Sortable on the draggable items container
+      Sortable.create(draggableItems, {
+        group: {
+          name: 'shared',
+          pull: 'clone', // Allow items to be cloned
+          put: false    // Prevent items from being dropped back into this container
+        },
+        animation: 150,
+        sort: false, // Prevent sorting within the source container
+        onEnd: function (evt) {
+          var itemEl = evt.item;
+          var fromIndex = evt.oldIndex;
+          var toIndex = evt.newIndex;
           console.log('Item moved from index', fromIndex, 'to', toIndex);
         },
       });
