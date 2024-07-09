@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capture Screenshot and Store in Firebase</title>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "YOUR_FIREBASE_API_KEY",
+            authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
+            projectId: "YOUR_FIREBASE_PROJECT_ID",
+            storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_FIREBASE_MESSAGING_SENDER_ID",
+            appId: "YOUR_FIREBASE_APP_ID"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        function captureScreenshot() {
+            html2canvas(document.querySelector("#sectionToCapture")).then(canvas => {
+                let imgData = canvas.toDataURL('image/png');
+                uploadImage(imgData);
+            });
+        }
+
+        function uploadImage(imageData) {
+            const storageRef = firebase.storage().ref();
+            const imageRef = storageRef.child('screenshots/screenshot.png');
+            imageRef.putString(imageData, 'data_url').then(snapshot => {
+                snapshot.ref.getDownloadURL().then(url => {
+                    displayImageUrl(url);
+                });
+            });
+        }
+
+        function displayImageUrl(imageUrl) {
+            const urlElement = document.getElementById('imageUrl');
+            urlElement.textContent = imageUrl;
+            urlElement.href = imageUrl;
+            console.log('Image URL:', imageUrl);
+        }
+    </script>
+</head>
+<body>
+    <div id="sectionToCapture" style="padding: 20px; border: 1px solid #ccc;">
+        <h1>This is the section to capture</h1>
+        <p>Include any content here that you want to capture in the screenshot.</p>
+    </div>
+    <button onclick="captureScreenshot()">Capture Screenshot</button>
+    <br><br>
+    <a id="imageUrl" target="_blank">Captured Image URL will appear here</a>
+</body>
+</html>
