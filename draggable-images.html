@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tier List with Draggable Items</title>
+  <title>Draggable Items</title>
   <style>
     .draggable-items {
       display: flex;
@@ -29,7 +29,7 @@
     }
   </style>
 </head>
-<body>  
+<body>
   <div class="draggable-items" id="draggable-items">
     <!-- Draggable items -->
     <div class="image-item" id="item1"><img src="https://via.placeholder.com/80" alt="Image 1"></div>
@@ -41,7 +41,6 @@
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var dropZone = document.getElementById('tier-dropzone');
       var draggableItems = document.getElementById('draggable-items');
 
       // Initialize Sortable on the draggable items container
