@@ -138,12 +138,16 @@
       // Initialize Sortable on each drop zone
       dropZones.forEach(function (zoneId) {
         var dropZone = document.getElementById(zoneId);
-        Sortable.create(dropZone, {
-          group: 'shared',
+        new Sortable(dropZone, {
+          group: {
+            name: 'shared',
+            pull: 'clone',
+            put: false
+          },
           animation: 150,
           onAdd: function (evt) {
             var itemEl = evt.item;
-            itemEl.parentNode.removeChild(itemEl); // Remove dragged item from the draggable items list
+            itemEl.parentNode.removeChild(itemEl);
             console.log('Item added to', zoneId, ':', itemEl.id);
           },
           onEnd: function (evt) {
@@ -156,14 +160,14 @@
       });
 
       // Initialize Sortable on the draggable items container
-      Sortable.create(draggableItems, {
+      new Sortable(draggableItems, {
         group: {
           name: 'shared',
-          pull: 'clone', // Allow items to be cloned
-          put: false    // Prevent items from being dropped back into this container
+          pull: 'clone',
+          put: false
         },
         animation: 150,
-        sort: false, // Prevent sorting within the source container
+        sort: false,
       });
     });
   </script>
