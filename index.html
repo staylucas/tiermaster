@@ -161,46 +161,78 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var dropZones = ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'];
-      var draggableItems = document.getElementById('draggable-items');
+  document.addEventListener('DOMContentLoaded', function () {
+    var dropZones = ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'];
+    var draggableItems = document.getElementById('draggable-items');
 
-      // Initialize Sortable on each drop zone
-      dropZones.forEach(function (zoneId) {
-        var dropZone = document.getElementById(zoneId);
-        Sortable.create(dropZone, {
-          group: 'shared',
-          animation: 150,
-          onAdd: function (evt) {
-            var itemEl = evt.item;
-            console.log('Item added to', zoneId, ':', itemEl.id);
-          },
-          onEnd: function (evt) {
-            var itemEl = evt.item;
-            var fromIndex = evt.oldIndex;
-            var toIndex = evt.newIndex;
-            console.log('Item moved in', zoneId, 'from index', fromIndex, 'to', toIndex);
-          },
-        });
-      });
-
-      // Initialize Sortable on the draggable items container
-      Sortable.create(draggableItems, {
-        group: {
-          name: 'shared',
-          pull: 'clone', // Allow items to be cloned
-          put: false    // Prevent items from being dropped back into this container
-        },
+    // Initialize Sortable on each drop zone
+    dropZones.forEach(function (zoneId) {
+      var dropZone = document.getElementById(zoneId);
+      Sortable.create(dropZone, {
+        group: 'shared',
         animation: 150,
-        sort: false, // Prevent sorting within the source container
+        onAdd: function (evt) {
+          var itemEl = evt.item;
+          console.log('Item added to', zoneId, ':', itemEl.id);
+        },
         onEnd: function (evt) {
           var itemEl = evt.item;
           var fromIndex = evt.oldIndex;
           var toIndex = evt.newIndex;
-          console.log('Item moved from index', fromIndex, 'to', toIndex);
+          console.log('Item moved in', zoneId, 'from index', fromIndex, 'to', toIndex);
         },
       });
     });
-  </script>
+
+    // Initialize Sortable on the draggable items container
+    Sortable.create(draggableItems, {
+      group: {
+        name: 'shared',
+        pull: 'clone', // Allow items to be cloned
+        put: false    // Prevent items from being dropped back into this container
+      },
+      animation: 150,
+      sort: false, // Prevent sorting within the source container
+      onEnd: function (evt) {
+        var itemEl = evt.item;
+        var fromIndex = evt.oldIndex;
+        var toIndex = evt.newIndex;
+        console.log('Item moved from index', fromIndex, 'to', toIndex);
+      },
+    });
+
+    // Save button functionality
+    document.getElementById('save-button').addEventListener('click', function () {
+      var tierData = {};
+
+      dropZones.forEach(function (zoneId) {
+        var dropZone = document.getElementById(zoneId);
+        var items = dropZone.getElementsByClassName('image-item');
+        tierData[zoneId] = Array.from(items).map(function (item) {
+          return item.id;
+        });
+      });
+
+      console.log('Tier Data:', tierData);
+
+      // Send tierData to Adalo database
+      fetch('YOUR_ADALO_DATABASE_API_ENDPOINT', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_ADALO_API_KEY'
+        },
+        body: JSON.stringify(tierData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    });
+  });
+</script>
 </body>
 </html>
