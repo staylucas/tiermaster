@@ -204,31 +204,46 @@
       });
     });
 
-    function saveTierList() {
-      var tierList = {};
+    <script>
+  function saveTierList() {
+    var tierList = {};
 
-      ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'].forEach(function (zoneId) {
-        var dropZone = document.getElementById(zoneId);
-        var items = Array.from(dropZone.children).map(function (item) {
-          return item.id;
-        });
-        tierList[zoneId] = items;
+    ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'].forEach(function (zoneId) {
+      var dropZone = document.getElementById(zoneId);
+      var items = Array.from(dropZone.children).map(function (item) {
+        return item.id;
       });
+      tierList[zoneId] = items;
+    });
 
-      var json = JSON.stringify(tierList, null, 2);
-      downloadJSON(json, 'tier-list.json');
-    }
+    var json = JSON.stringify(tierList);
 
-    function downloadJSON(json, filename) {
-      var blob = new Blob([json], { type: 'application/json' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  </script>
+    uploadToAdalo(json);
+  }
+
+  function uploadToAdalo(json) {
+    var apiKey = '987b04l73jsdkv8zyfr5w6fnc'; // Replace with your actual Adalo API key
+    var url = 'https://api.adalo.com/v0/apps/f1deecd5-c492-4c9f-b961-1b8358f07f9d/collections/t_0rusaj4khkgyth10nexxcpxqe'; // Replace with your actual Adalo collection API endpoint
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + apiKey
+      },
+      body: JSON.stringify({
+        name: 'My Tier List', // You can replace this with a dynamic value if needed
+        tierData: json
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+</script>
 </body>
 </html>
