@@ -139,15 +139,11 @@
       dropZones.forEach(function (zoneId) {
         var dropZone = document.getElementById(zoneId);
         new Sortable(dropZone, {
-          group: {
-            name: 'shared',
-            pull: 'clone',
-            put: false
-          },
+          group: 'shared',
           animation: 150,
           onAdd: function (evt) {
             var itemEl = evt.item;
-            itemEl.parentNode.removeChild(itemEl);
+            itemEl.parentNode.removeChild(itemEl); // Remove dragged item from the draggable items list
             console.log('Item added to', zoneId, ':', itemEl.id);
           },
           onEnd: function (evt) {
@@ -163,11 +159,11 @@
       new Sortable(draggableItems, {
         group: {
           name: 'shared',
-          pull: 'clone',
-          put: false
+          pull: 'clone', // Allow items to be cloned
+          put: false    // Prevent items from being dropped back into this container
         },
         animation: 150,
-        sort: false,
+        sort: false, // Prevent sorting within the source container
       });
     });
   </script>
