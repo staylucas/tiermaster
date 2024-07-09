@@ -159,10 +159,7 @@
       Sortable.create(draggableItems, {
         group: {
           name: 'shared',
-          pull: function (to, from, dragEl, evt) {
-            // Clone the item if it's dragged from the draggable items container
-            return from.el !== draggableItems;
-          },
+          pull: 'clone', // Allow items to be cloned
           put: false    // Prevent items from being dropped back into this container
         },
         animation: 150,
