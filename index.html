@@ -144,7 +144,6 @@
           animation: 150,
           onAdd: function (evt) {
             var itemEl = evt.item;
-            itemEl.parentNode.removeChild(itemEl); // Remove dragged item from the draggable items list
             console.log('Item added to', zoneId, ':', itemEl.id);
           },
           onEnd: function (evt) {
