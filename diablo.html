@@ -166,103 +166,91 @@
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var dropZones = ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'];
-    var draggableItems = document.getElementById('draggable-items');
+  var dropZones = ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'];
+  var draggableItems = document.getElementById('draggable-items');
 
-    dropZones.forEach(function (zoneId) {
-      var dropZone = document.getElementById(zoneId);
-      Sortable.create(dropZone, {
-        group: 'shared',
-        animation: 150,
-        onAdd: function (evt) {
-          var itemEl = evt.item;
-          itemEl.classList.add('small');
-          console.log('Item added to', zoneId, ':', itemEl.id);
-          itemEl.removeAttribute('style'); // Remove inline styles added by Sortable.js
-        },
-        onEnd: function (evt) {
-          var itemEl = evt.item;
-          var fromIndex = evt.oldIndex;
-          var toIndex = evt.newIndex;
-          console.log('Item moved in', zoneId, 'from index', fromIndex, 'to', toIndex);
-        },
-      });
-    });
-
-    Sortable.create(draggableItems, {
-      group: {
-        name: 'shared',
-        pull: 'clone',
-        put: false
-      },
+  dropZones.forEach(function (zoneId) {
+    var dropZone = document.getElementById(zoneId);
+    Sortable.create(dropZone, {
+      group: 'shared',
       animation: 150,
-      sort: false,
-      onStart: function (evt) {
-        evt.clone.classList.add('being-dragged');
+      onAdd: function (evt) {
+        var itemEl = evt.item;
+        itemEl.classList.add('small');
+        console.log('Item added to', zoneId, ':', itemEl.id);
+
+        // Update item's tier in the database
+        updateTierInDatabase(itemEl.id, zoneId);
       },
       onEnd: function (evt) {
-        if (evt.from === draggableItems && evt.clone) {
-          evt.clone.remove(); // Remove the clone from the draggable items container
-        }
+        var itemEl = evt.item;
+        var fromIndex = evt.oldIndex;
+        var toIndex = evt.newIndex;
+        console.log('Item moved in', zoneId, 'from index', fromIndex, 'to', toIndex);
+
+        // Handle reordering in the database if needed
+        // Optionally update item's position in the database
       },
     });
-    
-    function saveTierItems(tierListId) {
-  const tierData = {
-    "tier-s": ["item1", "item3"],
-    "tier-a": ["item2"],
-    "tier-b": [],
-    "tier-c": [],
-    "tier-d": [],
-    "tier-e": [],
-    "tier-f": ["item4", "item5"]
-  };
-
-  const promises = [];
-
-  Object.keys(tierData).forEach(tier => {
-    tierData[tier].forEach(itemId => {
-      promises.push(
-        fetch('https://your-adalo-api.com/collections/tieritems', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_API_KEY'
-          },
-          body: JSON.stringify({
-            "tierListID": tierListId,
-            "itemID": itemId,
-            "tier": tier
-          })
-        })
-      );
-    });
   });
 
-  Promise.all(promises)
-    .then(results => {
-      console.log('All items saved successfully');
+  Sortable.create(draggableItems, {
+    group: {
+      name: 'shared',
+      pull: 'clone',
+      put: false
+    },
+    animation: 150,
+    sort: false,
+    onStart: function (evt) {
+      evt.clone.classList.add('being-dragged');
+    },
+    onEnd: function (evt) {
+      if (evt.from === draggableItems && evt.clone) {
+        evt.clone.remove(); // Remove the clone from the draggable items container
+      }
+    },
+  });
+
+  // Function to update item's tier in the database
+  function updateTierInDatabase(itemId, newTier) {
+    // Example fetch request to update the tier of the item in your Adalo database
+    fetch(`https://your-adalo-api.com/collections/tieritems/${itemId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer YOUR_API_KEY'
+      },
+      body: JSON.stringify({
+        "tier": newTier
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Item tier updated successfully:', data);
     })
     .catch(error => {
-      console.error('Error saving items:', error);
+      console.error('Error updating item tier:', error);
     });
-}
+  }
 
-    window.saveTierList = function () {
-      var tierData = {};
+  // Function to save the entire tier list configuration to the database
+  window.saveTierList = function () {
+    // Example implementation to save the entire tier list configuration
+    // Fetch each drop zone's items and update them in your Adalo database accordingly
+    dropZones.forEach(function (zoneId) {
+      var dropZone = document.getElementById(zoneId);
+      var items = dropZone.getElementsByClassName('image-item');
 
-      dropZones.forEach(function (zoneId) {
-        var dropZone = document.getElementById(zoneId);
-        var items = dropZone.getElementsByClassName('image-item');
-        tierData[zoneId] = Array.from(items).map(function (item) {
-          return item.id;
-        });
+      Array.from(items).forEach(function (item) {
+        updateTierInDatabase(item.id, zoneId);
       });
+    });
 
-      console.log('Tier Data:', tierData);
-      // You can use the tierData variable in Adalo's button action
-    };
-  });
+    console.log('Tier list configuration saved.');
+    // You can further process or redirect after saving if needed
+  };
+});
   </script>
 </body>
 </html>
