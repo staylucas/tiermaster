@@ -206,6 +206,47 @@
         }
       },
     });
+    
+    function saveTierItems(tierListId) {
+  const tierData = {
+    "tier-s": ["item1", "item3"],
+    "tier-a": ["item2"],
+    "tier-b": [],
+    "tier-c": [],
+    "tier-d": [],
+    "tier-e": [],
+    "tier-f": ["item4", "item5"]
+  };
+
+  const promises = [];
+
+  Object.keys(tierData).forEach(tier => {
+    tierData[tier].forEach(itemId => {
+      promises.push(
+        fetch('https://your-adalo-api.com/collections/tieritems', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer YOUR_API_KEY'
+          },
+          body: JSON.stringify({
+            "tierListID": tierListId,
+            "itemID": itemId,
+            "tier": tier
+          })
+        })
+      );
+    });
+  });
+
+  Promise.all(promises)
+    .then(results => {
+      console.log('All items saved successfully');
+    })
+    .catch(error => {
+      console.error('Error saving items:', error);
+    });
+}
 
     window.saveTierList = function () {
       var tierData = {};
