@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tier List Maker</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      width: 100vw;
+    }
+    .tier-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .tier-label-wrapper {
+      width: 15%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      border-right: 2px solid #ccc;
+      background-color: #e9ecef;
+    }
+    .tier-label {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .drop-zone {
+      width: 85%;
+      height: 10vw;
+      border: 2px dashed #ddd;
+      padding: 10px;
+      margin-left: 10px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 5px;
+      align-items: center;
+      background-color: #f0f0f0;
+      overflow-y: auto;
+      border-radius: 8px;
+    }
+    .drop-zone img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .draggable-items {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 20px;
+      width: 100%;
+      border: 2px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .image-item {
+      width: 22vw; /* Adjusted size for better fit on smartphone screens */
+      height: 22vw; /* Adjusted size for better fit on smartphone screens */
+      cursor: grab;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+      transition: transform 0.2s ease;
+    }
+    .image-item img {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+    }
+    .image-item:hover {
+      transform: scale(1.05);
+    }
+    .small {
+      width: 12vw;
+      height: 12vw;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tier-row">
+      <div class="tier-label-wrapper">
+        <img class="tier-label" src="https://i.ibb.co/gFrhggr/S.png" alt="S">
+      </div>
+      <div class="drop-zone" id="tier-s"></div>
+    </div>
+    
+    <div class="tier-row">
+      <div class="tier-label-wrapper">
+        <img class="tier-label" src="https://i.ibb.co/VmSn2XK/A.png" alt="A">
+      </div>
+      <div class="drop-zone" id="tier-a"></div>
+    </div>
+    
+    <div class="tier-row">
+      <div class="tier-label-wrapper">
+        <img class="tier-label" src="https://i.ibb.co/fSkdfPN/B.png" alt="B">
+      </div>
+      <div class="drop-zone" id="tier-b"></div>
+    </div>
+    
+    <div class="tier-row">
+      <div class="tier-label-wrapper">
+        <img class="tier-label" src="https://i.ibb.co/fp3b5G1/C.png" alt="C">
+      </div>
+      <div class="drop-zone" id="tier-c"></div>
+    </div>
+    
+    <div class="tier-row">
+      <div class="tier-label-wrapper">
+        <img class="tier-label" src="https://i.ibb.co/3NVjjc3/D.png" alt="D">
+      </div>
+      <div class="drop-zone" id="tier-d"></div>
+    </div>
+    
+    <div class="tier-row">
+      <div class="tier-label-wrapper">
+        <img class="tier-label" src="https://i.ibb.co/WF1yRZG/E.png" alt="E">
+      </div>
+      <div class="drop-zone" id="tier-e"></div>
+    </div>
+    
+    <div class="tier-row">
+      <div class="tier-label-wrapper">
+        <img class="tier-label" src="https://i.ibb.co/bR9zFM0/F.png" alt="F">
+      </div>
+      <div class="drop-zone" id="tier-f"></div>
+    </div>
+  </div>
+  
+  <div class="draggable-items" id="draggable-items">
+    <div class="image-item" id="item1"><img src="https://i.ibb.co/r5fssZs/Vertigo.png" alt="Image 1"></div>
+    <div class="image-item" id="item2"><img src="https://i.ibb.co/m8PrmV8/Dust-2.png" alt="Image 2"></div>
+    <div class="image-item" id="item3"><img src="https://i.ibb.co/WV1MYkj/Anubis.png" alt="Image 3"></div>
+    <div class="image-item" id="item4"><img src="https://i.ibb.co/jTpBJbX/Nuke.png" alt="Image 4"></div>
+    <div class="image-item" id="item5"><img src="https://i.ibb.co/NjKttDN/Inferno.png" alt="Image 5"></div>
+    <div class="image-item" id="item6"><img src="https://i.ibb.co/vsjRyZY/Ancient.png" alt="Image 6"></div>
+    <div class="image-item" id="item7"><img src="https://i.ibb.co/QJSZnhM/Overpass.png" alt="Image 7"></div>
+    <div class="image-item" id="item8"><img src="https://i.ibb.co/MGm8Q6v/Mirage.png" alt="Image 8"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var dropZones = ['tier-s', 'tier-a', 'tier-b', 'tier-c', 'tier-d', 'tier-e', 'tier-f'];
+    var draggableItems = document.getElementById('draggable-items');
+
+    dropZones.forEach(function (zoneId) {
+      var dropZone = document.getElementById(zoneId);
+      Sortable.create(dropZone, {
+        group: 'shared',
+        animation: 150,
+        onAdd: function (evt) {
+          var itemEl = evt.item;
+          itemEl.classList.add('small');
+          console.log('Item added to', zoneId, ':', itemEl.id);
+          itemEl.removeAttribute('style'); // Remove inline styles added by Sortable.js
+        },
+        onEnd: function (evt) {
+          var itemEl = evt.item;
+          var fromIndex = evt.oldIndex;
+          var toIndex = evt.newIndex;
+          console.log('Item moved in', zoneId, 'from index', fromIndex, 'to', toIndex);
+        },
+      });
+    });
+
+    Sortable.create(draggableItems, {
+      group: {
+        name: 'shared',
+        pull: 'clone',
+        put: false
+      },
+      animation: 150,
+      sort: false,
+      onStart: function (evt) {
+        evt.clone.classList.add('being-dragged');
+      },
+      onEnd: function (evt) {
+        if (evt.from === draggableItems && evt.clone) {
+          evt.clone.remove(); // Remove the clone from the draggable items container
+        }
+      },
+    });
+
+    window.saveTierList = function () {
+      var tierData = {};
+
+      dropZones.forEach(function (zoneId) {
+        var dropZone = document.getElementById(zoneId);
+        var items = dropZone.getElementsByClassName('image-item');
+        tierData[zoneId] = Array.from(items).map(function (item) {
+          return item.id;
+        });
+      });
+
+      console.log('Tier Data:', tierData);
+      // You can use the tierData variable in Adalo's button action
+    };
+  });
+  </script>
+</body>
+</html>
