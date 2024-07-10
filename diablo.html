@@ -62,8 +62,8 @@
       width: 80vw;
     }
     .image-item {
-      width: 10vw; /* Adjusted size for better fit on smartphone screens */
-      height: 10vw; /* Adjusted size for better fit on smartphone screens */
+      width: 20vw; /* Adjusted size for better fit on smartphone screens */
+      height: 20vw; /* Adjusted size for better fit on smartphone screens */
       cursor: grab;
       text-align: center;
       display: flex;
@@ -135,11 +135,10 @@
   </div>
   
   <div class="draggable-items" id="draggable-items">
-    <div class="image-item" id="item1"><img src="https://i.ibb.co/6bssBQy/Necro.png" alt="Image 1"></div>
-    <div class="image-item" id="item2"><img src="https://i.ibb.co/9g8jPdb/SORC.png" alt="Image 2"></div>
-    <div class="image-item" id="item3"><img src="https://i.ibb.co/qMg3J75/Barb.png" alt="Image 3"></div>
-    <div class="image-item" id="item4"><img src="https://i.ibb.co/SyF3YNq/Rogue.png" alt="Image 4"></div>
-    <div class="image-item" id="item5"><img src="https://i.ibb.co/5xWrZxH/Druid.png" alt="Image 5"></div>
+    <div class="image-item" id="item1"><img src="https://via.placeholder.com/150" alt="Image 1"></div>
+    <div class="image-item" id="item2"><img src="https://via.placeholder.com/150" alt="Image 2"></div>
+    <div class="image-item" id="item3"><img src="https://via.placeholder.com/150" alt="Image 3"></div>
+    <div class="image-item" id="item4"><img src="https://via.placeholder.com/150" alt="Image 4"></div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
@@ -157,6 +156,7 @@
           var itemEl = evt.item;
           itemEl.classList.add('small');
           console.log('Item added to', zoneId, ':', itemEl.id);
+          itemEl.removeAttribute('style'); // Remove inline styles added by Sortable.js
         },
         onEnd: function (evt) {
           var itemEl = evt.item;
@@ -175,11 +175,13 @@
       },
       animation: 150,
       sort: false,
+      onStart: function (evt) {
+        evt.clone.classList.add('being-dragged');
+      },
       onEnd: function (evt) {
-        var itemEl = evt.item;
-        var fromIndex = evt.oldIndex;
-        var toIndex = evt.newIndex;
-        console.log('Item moved from index', fromIndex, 'to', toIndex);
+        if (evt.from === draggableItems && evt.clone) {
+          evt.clone.remove(); // Remove the clone from the draggable items container
+        }
       },
     });
 
