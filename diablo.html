@@ -9,20 +9,25 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
     }
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 10px;
+      padding: 20px;
       width: 100vw;
     }
     .tier-row {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
-      width: 100%;
+      width: 90%;
       box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     .tier-label-wrapper {
       width: 10vw;
@@ -30,13 +35,15 @@
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
+      border-right: 2px solid #ccc;
+      background-color: #e9ecef;
     }
     .tier-label {
       max-width: 100%;
       max-height: 100%;
     }
     .drop-zone {
-      width: 60vw;
+      width: 80vw;
       height: 10vw;
       border: 2px dashed #ddd;
       padding: 10px;
@@ -48,6 +55,7 @@
       align-items: center;
       background-color: #f0f0f0;
       overflow-y: auto;
+      border-radius: 8px;
     }
     .drop-zone img {
       max-width: 100%;
@@ -59,7 +67,12 @@
       justify-content: center;
       flex-wrap: wrap;
       margin: 20px;
-      width: 80vw;
+      width: 90%;
+      border: 2px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     .image-item {
       width: 20vw; /* Adjusted size for better fit on smartphone screens */
@@ -70,11 +83,19 @@
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+      transition: transform 0.2s ease;
     }
     .image-item img {
       width: 100%;
       height: 100%;
       border: none;
+      border-radius: 8px;
+    }
+    .image-item:hover {
+      transform: scale(1.05);
     }
     .small {
       width: 5vw;
